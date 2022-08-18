@@ -12,15 +12,15 @@
     <section class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-5 bg-secondary p-5 text-white text-center rounded">
-                <h4 class="fw-bold text-white">Your Total Price: <span class="text-white">120 Tk</h4>
+                <h4 class="fw-bold text-white">Your Total Price: <span id="totalBalance">100</span> Tk</h4>
                     <div class="d-flex align-items-center justify-content-center">
                         <h6 class="d-inline col-8 text-warning fw-bold">Tyep DOM to get 30% discount</h6>
-                        <input type="text" name="" id="coupon" placeholder="Coupone Code.." class="d-block mx-auto col-4">
+                        <input type="text" name="" id="couponCode" placeholder="Coupone Code.." class="d-block mx-auto col-4">
                     </div>
                         <div id="discountContainer">
-                            <h5 class="fw-bold mt-4">Your Discount Total Price : <span id="discountTotal">120</span>Tk</h5>
+                            <h5 class="fw-bold mt-4">Your Discount Total Price : <span id="discountTotal"></span>Tk</h5>
                         </div>
-                <button class="btn btn-warning mt-2 fw-bold">Checkout</button>
+                <button id="discountBtn" class="btn btn-warning mt-2 fw-bold">Checkout</button>
             </div>
         </div>
     </section>
@@ -28,5 +28,23 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script>
+        const totalBalance = document.getElementById('totalBalance');
+        const couponCode = document.getElementById('couponCode');
+        const discountTotal = document.getElementById('discountTotal');
+        discountTotal.innerText = totalBalance.innerText;
+        document.getElementById('discountBtn').addEventListener('click',()=>{
+            const totalBalanceString = totalBalance.innerText;
+            const total = parseFloat(totalBalanceString);
+            if (couponCode.value === 'DOM') {
+                const totalDiscount = total*.30;
+                const payTotalWithDiscount = total - totalDiscount;
+                discountTotal.innerText = payTotalWithDiscount;
+            }
+            else{
+                discountTotal.innerText = total;
+            }
+        })
+    </script>
   </body>
 </html>
